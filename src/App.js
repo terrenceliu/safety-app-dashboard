@@ -1,11 +1,17 @@
 import React, { Component } from 'react';
 import './App.css';
+import './assets/react-toolbox/theme.css';
 import RequestCollection from './Components/RequestCollection';
 
 // import the Google Maps API Wrapper from google-maps-react
 import { GoogleApiWrapper } from 'google-maps-react'
 // import child component
 import MapContainer from './Components/MapContainer'
+
+// UI
+import theme from './assets/react-toolbox/theme.js';
+import ThemeProvider from 'react-toolbox/lib/ThemeProvider';
+import Button from 'react-toolbox/lib/button/Button';
 
 class App extends Component {
   state = {
@@ -23,10 +29,13 @@ class App extends Component {
 
   render() {
     return (
-      <div className="App">
-        <RequestCollection requests={this.state.requests} />
-        <MapContainer google={this.props.google} requests={this.state.requests} />
-      </div>
+      <ThemeProvider theme={theme}>
+        <div className="App">
+          <Button icon='bookmark' label='TestIcon' raised primary />
+          <RequestCollection requests={this.state.requests} />
+          <MapContainer google={this.props.google} requests={this.state.requests} />
+        </div>
+      </ThemeProvider>
     );
   }
 }

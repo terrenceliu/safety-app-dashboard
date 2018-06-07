@@ -25,9 +25,6 @@ export default class MapContainer extends Component {
   updateMap() {
     if (this.props && this.props.google) { // checks to make sure that props have been passed
       if (this.props.requests != null) {
-
-        console.log(this.props.requests);
-
         const { google } = this.props; // sets props equal to google
         
         this.props.requests.forEach( req => { // iterate through locations saved in state
@@ -36,7 +33,6 @@ export default class MapContainer extends Component {
             map: this.map, // sets markers to appear on the map we just created on line 35
             title: req._id // the title of the marker is set to the name of the location
           });
-          console.log(marker);
         });
       };
     }
