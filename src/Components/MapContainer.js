@@ -1,8 +1,20 @@
 
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom'
+import { relative } from 'path';
 
 export default class MapContainer extends Component {
+  constructor() {
+    super();
+    this.state = {
+      parentWidth: undefined,
+      parentHeight: undefined,
+      style: {
+        width: '0px', // 90vw basically means take up 90% of the width screen. px also works.
+        height: '0px' // 75vh similarly will take up roughly 75% of the height of the screen. px also works.
+      }
+    }
+  }
 
   loadMap() {
     if (this.props && this.props.google) { // checks to make sure that props have been passed
@@ -39,6 +51,18 @@ export default class MapContainer extends Component {
   }
   
   componentDidMount() {
+    const parentWidth = this.refs.map.parentNode.clientWidth;
+    
+    console.log('parent width: ' + parentWidth);
+
+    this.setState({
+      style: {
+        width: parentWidth * 0.8,
+        height: parentWidth * 0.8,
+        position: relative
+      }
+    })
+
     this.loadMap(); // call loadMap function to load the google map
   }
 
@@ -47,14 +71,12 @@ export default class MapContainer extends Component {
   }
 
   render() {
-    const style = { // MUST specify dimensions of the Google map or it will not work. Also works best when style is specified inside the render function and created as an object
-      width: '250px', // 90vw basically means take up 90% of the width screen. px also works.
-      height: '250px' // 75vh similarly will take up roughly 75% of the height of the screen. px also works.
-    }
-
     return ( // in our return function you must return a div with ref='map' and style.
-      <div ref="map" style={style}>
-        loading map...
+      <div>
+        <h3> Map </h3>
+        <div ref="map" style={this.state.style}>
+          
+        </div>
       </div>
     )
   }

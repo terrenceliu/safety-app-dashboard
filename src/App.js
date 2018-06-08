@@ -1,42 +1,15 @@
 import React, { Component } from 'react';
-<<<<<<< HEAD
-// import uuid from 'uuid/v4';
 import './App.css';
-import RequestCollection from './Components/RequestCollection'
-
-class App extends Component {
-  
-  constructor() {
-    super();
-    this.state = {
-      requests: undefined
-    }
-  }
-
-  async componentDidMount() {
-    console.log('Did mount.')
-    
-    const response = await fetch("https://safety-server.herokuapp.com/api/req");
-
-    const data = await response.json()
-    
-    console.log(data)
-  }
-
-
-  render() {
-    return (
-      <div className="App">
-        <RequestCollection requests={this.state.requests} />
-      </div>
-=======
-import './App.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import RequestCollection from './Components/RequestCollection';
 
 // import the Google Maps API Wrapper from google-maps-react
 import { GoogleApiWrapper } from 'google-maps-react'
 // import child component
 import MapContainer from './Components/MapContainer'
+
+// UI
+import { Container, Row, Col, Navbar, Nav, NavbarBrand, NavItem, NavLink, Collapse} from 'reactstrap';
 
 class App extends Component {
   state = {
@@ -55,18 +28,38 @@ class App extends Component {
   render() {
     return (
         <div className="App">
-          <RequestCollection requests={this.state.requests} />
-          <MapContainer google={this.props.google} requests={this.state.requests} />
+          <Navbar color="light" lgiht expand="md">
+            <NavbarBrand href="#"> Rice Safety </NavbarBrand>
+            <Collapse isOpen={false} navbar>
+              <Nav className="mr-auto" navbar>
+                <NavItem> 
+                  <NavLink href="#">
+                    Link # 1 
+                  </NavLink>
+                </NavItem>
+                <NavItem>
+                  <NavLink href="#">
+                    Link # 2
+                  </NavLink>
+                </NavItem>
+              </Nav>
+            </Collapse>
+          </Navbar>
+          <Container>
+            <Row>
+              <Col xs="4">
+                <RequestCollection requests={this.state.requests} />
+              </Col> 
+              <Col xm="8">
+                <MapContainer google={this.props.google} requests={this.state.requests} />
+              </Col>
+            </Row>
+          </Container>
         </div>
->>>>>>> 5055466436027e787c47f5eaf24e01c2f20e2643
     );
   }
 }
 
-<<<<<<< HEAD
-export default App;
-=======
 export default GoogleApiWrapper({
   apiKey: 'AIzaSyCRkw7Lzkby2rK2AWoEenHlX_RQ19A_Hp0',
 })(App)
->>>>>>> 5055466436027e787c47f5eaf24e01c2f20e2643
