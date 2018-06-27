@@ -2,31 +2,39 @@ import React, { Component } from 'react';
 
 import RequestItem from './RequestItem';
 
-import { ListGroup } from 'reactstrap';
+// Material-UI
+import PropTypes from 'prop-types';
+import { withStyles } from '@material-ui/core/styles';
+
+const styles = (props) => {
+
+}
+
 
 class RequestCollection extends Component {
 
   
+  reqListFactory = (items) => {
+    return items.map((req) => <RequestItem request={req} />);
+  }
+
 
   render() {
-    let requestItems;
     
-    if (this.props.requests) {
-      requestItems = this.props.requests.map(req => {
-        return (
-          <RequestItem key={req._id} request={req}/>
-        );
-      })
-    }
-
-
     return (
       <div>
         <h3> Active Requests </h3>
-        <ListGroup className="reqList" > {requestItems} </ListGroup>
+        {
+          this.props.requests &&
+          this.reqListFactory(this.props.requests)
+        }
       </div>
     );
   }
 }
 
-export default RequestCollection;
+RequestCollection.propTypes = {
+  classes: PropTypes.object.isRequired
+}
+
+export default withStyles(styles)(RequestCollection);
