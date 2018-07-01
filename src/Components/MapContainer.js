@@ -38,22 +38,30 @@ export default class MapContainer extends Component {
     if (this.props && this.props.google) { // checks to make sure that props have been passed
       if (this.props.requests != null) {
         const { google } = this.props; // sets props equal to google
-        
-        this.props.requests.forEach( req => { // iterate through locations saved in state
-          const marker = new google.maps.Marker({ // creates a new Google maps Marker object.
-            position: {lat: req.latitude, lng: req.longitude}, // sets position of marker to specified location
-            map: this.map, // sets markers to appear on the map we just created on line 35
-            title: req._id // the title of the marker is set to the name of the location
+        const { requests } = this.props;
+        // this.props.requests.forEach( req => { // iterate through locations saved in state
+        //   const marker = new google.maps.Marker({ // creates a new Google maps Marker object.
+        //     position: {lat: req.latitude, lng: req.longitude}, // sets position of marker to specified location
+        //     map: this.map, // sets markers to appear on the map we just created on line 35
+        //     label: req.key // the title of the marker is set to the name of the location
+        //   });
+        // });
+
+        for (var i = 0; i < requests.length; i++) {
+          let req = requests[i];
+          const marker = new google.maps.Marker({
+            position: {lat: req.latitude, lng: req.longitude},
+            map: this.map,
+            label: i.toString()
           });
-        });
+        }
+
       };
     }
   }
   
   componentDidMount() {
     const parentWidth = this.refs.map.parentNode.clientWidth;
-    
-    console.log('parent width: ' + parentWidth);
 
     this.setState({
       style: {

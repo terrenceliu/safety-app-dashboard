@@ -12,10 +12,12 @@ const styles = (props) => {
 
 
 class RequestCollection extends Component {
-
+  constructor() {
+    super();
+  }
   
-  reqListFactory = (items) => {
-    return items.map((req) => <RequestItem request={req} />);
+  reqListFactory = (req_map) => {
+    return req_map.map((req) => <RequestItem request={req} />);
   }
 
 
