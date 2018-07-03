@@ -25,6 +25,7 @@ class RequestItem extends Component {
     let id = this.props.request._id;
     let lat = this.props.request.latitude;
     let lng = this.props.request.longitude;
+    let timestamp = this.props.request.timestamp;
 
     const { classes } = this.props;
 
@@ -42,7 +43,7 @@ class RequestItem extends Component {
           </ListItemAvatar>
           <ListItemText
             primary={"(" + lat + ", " + lng + ")"}
-            secondary={id}
+            secondary={id + ", " + timestamp}
           />
         </ListItem>
       </div>

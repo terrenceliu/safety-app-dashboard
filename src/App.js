@@ -21,9 +21,13 @@ class App extends Component {
     super();
     this.state = {
       requests: undefined,
-      req_map: undefined    
+      req_map: undefined      // Only keeps one request per case? (Latest request)
     };
-    this.socket = undefined;
+
+    // Open Socket
+    this.socket = openSocket("http://localhost:8000");
+    this.initSocket();
+
   }
   
   updateReqMap = () => {
@@ -48,14 +52,46 @@ class App extends Component {
     
     this.setState({
       req_map: res
-    })
+    });
   }
 
   initSocket = () => {
-    this.socket = openSocket("http://localhost:8000");
-    this.socket.on('request', function(data) {
-      console.log("[Socket] New request.", data);
-    })
+    // Update request from server
+    this.socket.on('request-update', (data) => {
+      let case_id = data.case_id
+      let req_map = this.state.req_map;
+
+      // console.log(data);
+
+      let found_flag = false;
+      for (var i = 0; i < req_map.length; i++) {
+        if (req_map[i].case_id == case_id) {
+          // Update request
+          req_map[i].latitude = data.latitude;
+          req_map[i].longitude = data.longitude;
+          req_map[i].timestamp = data.timestamp;
+          found_flag = true;
+        }
+      }
+
+      if (!found_flag) {
+        let req = {
+          case_id: "" + data.case_id,
+          timestamp: "",
+          latitude: 0.0 + data.latlng.lat,
+          longitude: 0.0 + data.latlng.lng
+        }
+        req_map.push(req);
+        console.log(req);
+      }
+
+      this.setState({
+        req_map: req_map
+      });
+
+
+
+    });
   };
 
   componentDidMount() {
@@ -63,8 +99,7 @@ class App extends Component {
     
     const api_addr = "http://localhost:8000/api/req";
 
-    // Open Socket
-    this.initSocket();
+    
 
     // Fetch Data
     fetch(api_addr, {
