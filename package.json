@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "webpack-dev-server --mode development --open --content-base ./src",
+    "start": "webpack-dev-server --mode development --content-base ./src",
     "build": "webpack --mode production",
     "watch": "webpack --watch --mode development"
   },
@@ -30,6 +30,7 @@
     "html-webpack-plugin": "^3.2.0",
     "react": "^16.4.1",
     "react-dom": "^16.4.1",
+    "react-router-dom": "^4.3.1",
     "socket.io-client": "^2.1.1",
     "webpack": "^4.12.1",
     "webpack-cli": "^3.0.8",
