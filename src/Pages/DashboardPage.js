@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Component } from "react";
 import PropTypes from "prop-types";
 
 import withStyles from '@material-ui/core/styles/withStyles';
@@ -9,11 +9,11 @@ import CardContent from "@material-ui/core/CardContent";
 
 import dashboardPageStyle from "../Assets/jss/Pages/dashboardPageStyle";
 
-class DashboardPage extends React.Component {
+class DashboardPage extends Component {
     state = {
         index: 0
     }
-    
+
     handleChange = (event, value) => {
         this.setState({
             index
@@ -31,15 +31,15 @@ class DashboardPage extends React.Component {
         return (
             <div>
                 <h1>
-                    This is dashboard page.
+                    Dashboard Page
                 </h1>
                 <Grid container>
                     <Grid item xs={12} sm={6} md={3}>
-                        Sample Grid One
+                        Case List
                     </Grid>
                 </Grid>
                 <Grid item xs={12} sm={12} md={6}>
-                    Sample Grid Two
+                    Map Panel
                 </Grid>
             </div>
         )

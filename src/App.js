@@ -132,7 +132,6 @@ class App extends Component {
     
     // const api_addr = "http://localhost:8000/api/req";
 
-<<<<<<< HEAD
     // // Open Socket
     // this.initSocket();
     
@@ -151,25 +150,6 @@ class App extends Component {
     // .then(() => {
     //   this.updateReqMap();
     // });
-=======
-    
-
-    // Fetch Data
-    fetch(api_addr, {
-      method: 'GET'
-    })
-    .then(res => res.json())
-    .then(data => {
-      // console.log(data.slice(0, 20));
-      console.log(data.length);
-      this.setState({
-        requests: data.slice() 
-      });
-    })
-    .then(() => {
-      this.updateReqMap();
-    });
->>>>>>> 3e797012f578c18fc2a9328609e0b2a49ac46186
   }
   
   render() {
